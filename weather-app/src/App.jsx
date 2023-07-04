@@ -12,6 +12,7 @@ function App() {
   return (
     <Box sx={{
       marginTop: "20px",
+      padding: 2,
       width: "80vw",
       maxWidth: 1000,
       height: "90vh",
