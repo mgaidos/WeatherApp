@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
+
+//custom hooks
+import useDebounce from '../hooks/useDebounce';
 
 //MUI Components
 import { styled } from '@mui/material/styles';
@@ -18,7 +21,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
         [theme.breakpoints.up('sm')]: {
             '&:focus': {
                 width: '70rem',
-                
+
             }
         },
     },
@@ -51,14 +54,26 @@ const IconWrapper = styled('div')(({ theme }) => ({
 
 }))
 const SearchInput = () => {
+
+    const [inputValue, setInputValue] = useState(null)
+    const debouncedValue = useDebounce(inputValue, 1000)
+
+    const handleChange = (e) => {
+        
+
+        setInputValue(e.target.value)
+    }
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Search>
                 <IconWrapper>
                     <SearchIcon />
                 </IconWrapper>
-                <StyledInputBase placeholder='Select city...' />
+                <StyledInputBase onChange={handleChange} placeholder='Select city...' />
             </Search>
+
+            {debouncedValue && <Typography>Počasí v {debouncedValue} je</Typography>}
 
         </Box>
     )
