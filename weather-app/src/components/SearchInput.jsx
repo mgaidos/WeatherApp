@@ -59,8 +59,6 @@ const SearchInput = () => {
     const debouncedValue = useDebounce(inputValue, 1000)
 
     const handleChange = (e) => {
-        
-
         setInputValue(e.target.value)
     }
 
