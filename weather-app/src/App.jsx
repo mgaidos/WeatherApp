@@ -13,10 +13,11 @@ function App() {
       maxWidth: 1000,
       height: "90vh",
       display: "flex",
-      border: "1px solid black",
-      borderRadius: 5
-      }}>
-  
+      borderRadius: 5,
+      backgroundColor: "inherit",
+      boxShadow: "-12px 10px 17px 0px rgba(0,0,0,0.24)"
+    }}>
+
     </Box>
   )
 }
