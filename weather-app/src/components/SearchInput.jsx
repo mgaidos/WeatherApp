@@ -71,6 +71,7 @@ const SearchInput = () => {
     const { long, lat } = useCoordinates(debouncedValue)
 
     const forecast = useForecast(coordinates)
+    //console.log(forecast)
 
 
     useEffect(() => {
@@ -91,7 +92,7 @@ const SearchInput = () => {
                 <StyledInputBase onChange={handleChange} placeholder='Select city...' />
             </Search>
 
-            {<Autocomplete></Autocomplete>}
+            {<Autocomplete/>}
 
 
             <p>{inputValue && coordinates.long}</p>
