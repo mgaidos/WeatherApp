@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 //custom hooks
 import useDebounce from '../hooks/useDebounce';
+import useCoordinates from '../hooks/useCoordinates';
 
 //MUI Components
 import { styled } from '@mui/material/styles';
@@ -9,6 +10,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
+
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: "inherit",
@@ -58,6 +60,21 @@ const SearchInput = () => {
     const [inputValue, setInputValue] = useState(null)
     const debouncedValue = useDebounce(inputValue, 1000)
 
+    const [coordinates, setCoordinates] = useState({ long: null, lat: null })
+    const { long, lat } = useCoordinates(debouncedValue)
+
+
+
+    useEffect(() => {
+        setCoordinates({ long: long, lat: lat })
+    }, [long, lat])
+
+
+
+
+
+    //console.log(import.meta.env.VITE_MY_ACCESS_TOKEN)
+
     const handleChange = (e) => {
         setInputValue(e.target.value)
     }
@@ -70,6 +87,9 @@ const SearchInput = () => {
                 </IconWrapper>
                 <StyledInputBase onChange={handleChange} placeholder='Select city...' />
             </Search>
+            <p>{inputValue && coordinates.long}</p>
+            <p>{inputValue && coordinates.lat}</p>
+
 
             {debouncedValue && <Typography>Počasí v {debouncedValue} je</Typography>}
 

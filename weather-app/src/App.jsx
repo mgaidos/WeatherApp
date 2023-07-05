@@ -1,10 +1,12 @@
 import React from 'react'
 
-//MUI Components
-import { Box } from '@mui/material'
+
 
 //Components
 import SearchInput from './components/SearchInput'
+
+//MUI Components
+import { Box } from '@mui/material'
 
 function App() {
 
