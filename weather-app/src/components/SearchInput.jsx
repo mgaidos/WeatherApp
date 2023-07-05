@@ -70,11 +70,6 @@ const SearchInput = () => {
     }, [long, lat])
 
 
-
-
-
-    //console.log(import.meta.env.VITE_MY_ACCESS_TOKEN)
-
     const handleChange = (e) => {
         setInputValue(e.target.value)
     }
