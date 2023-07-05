@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 //custom hooks
 import useDebounce from '../hooks/useDebounce';
@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
+import useForecast from '../hooks/useForecast';
 
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -60,9 +61,13 @@ const SearchInput = () => {
     const [inputValue, setInputValue] = useState(null)
     const debouncedValue = useDebounce(inputValue, 1000)
 
-    const [coordinates, setCoordinates] = useState({ long: null, lat: null })
+    const [coordinates, setCoordinates] = useState({
+        long: null,
+        lat: null
+    })
     const { long, lat } = useCoordinates(debouncedValue)
 
+    const forecast = useForecast(coordinates)
 
 
     useEffect(() => {
@@ -87,6 +92,7 @@ const SearchInput = () => {
 
 
             {debouncedValue && <Typography>Počasí v {debouncedValue} je</Typography>}
+            <Typography> Teplota {forecast && forecast.data.hourly.temperature_2m[0]} </Typography>
 
         </Box>
     )
