@@ -4,6 +4,9 @@ import { useState, useEffect } from 'react'
 import useDebounce from '../hooks/useDebounce';
 import useCoordinates from '../hooks/useCoordinates';
 
+//Components
+import Autocomplete from './Autocomplete';
+
 //MUI Components
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -87,6 +90,10 @@ const SearchInput = () => {
                 </IconWrapper>
                 <StyledInputBase onChange={handleChange} placeholder='Select city...' />
             </Search>
+
+            {<Autocomplete></Autocomplete>}
+
+
             <p>{inputValue && coordinates.long}</p>
             <p>{inputValue && coordinates.lat}</p>
 
