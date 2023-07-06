@@ -13,7 +13,7 @@ const useForecast = (coordinates) => {
         if (long !== null && lat !== null) {
             axios.get(`${meteoUrl}latitude=${lat}&longitude=${long}&hourly=temperature_2m,rain,cloudcover,windspeed_10m,uv_index,is_day&daily=sunrise,sunset,uv_index_max,precipitation_sum,rain_sum&timezone=Europe%2FBerlin`)
                 .then(data => {
-                    //console.log(data)
+                    console.log(data)
                     setForecast(data)
                 })
                 .catch(err => {
