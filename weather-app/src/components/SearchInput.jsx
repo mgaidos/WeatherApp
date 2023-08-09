@@ -5,6 +5,7 @@ import useAutocomplete from '@mui/base/useAutocomplete';
 import { styled } from '@mui/system';
 import SearchIcon from '@mui/icons-material/Search';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import AddIcon from '@mui/icons-material/Add';
 
 import { WeatherContext } from '../App';
 
@@ -106,11 +107,12 @@ const SearchWrapper = styled('div')(({ theme }) => ({
 const IconWrapper = styled('div')(({ theme }) => ({
     padding: theme.spacing(0, 1),
     height: '100%',
+    width: '100%',
     position: 'absolute',
     pointerEvents: 'none',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
 }));
 
 const StyledHeader = styled('header')(({ theme }) => ({
@@ -126,6 +128,12 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
     width: '100%',
 }))
 
+const DeleteIcon = styled(AddIcon)(({ theme }) => ({
+    transform: 'rotate(45deg)',
+    '&:hover': {
+        color: 'blue',
+      },
+}))
 
 export default function UseAutocomplete() {
 
@@ -164,7 +172,7 @@ export default function UseAutocomplete() {
     }
 
     const handleClick = (option) => {
-        
+
         const latitude = option.lat
         const longitude = option.lon
 
@@ -172,7 +180,7 @@ export default function UseAutocomplete() {
         setSearchedLocation(option.address.name)
         setCurrentLocationName(option.address.name)
         setCurrentLocationCountry(option.address.country)
-        setSelectedLocation({latitude, longitude})
+        setSelectedLocation({ latitude, longitude })
         setLocationOptions([])
 
     }
@@ -194,7 +202,7 @@ export default function UseAutocomplete() {
     });
 
     useEffect(() => {
-       // console.log(groupedOptions)
+        // console.log(groupedOptions)
     }, [groupedOptions])
 
 
@@ -207,9 +215,17 @@ export default function UseAutocomplete() {
 
                 <IconWrapper>
                     <SearchIcon />
+                    <DeleteIcon />
                 </IconWrapper>
 
+
+
                 <Input placeholder='Vyberte místo' onInput={handleChange} {...getInputProps()} />
+
+
+
+
+
 
             </SearchWrapper>
 
@@ -240,12 +256,15 @@ export default function UseAutocomplete() {
                                             {option.display_name}
                                         </StyledTypography>
                                     </ListItem>
+
                                 </SearchWrapper>
 
                             </div>
                         ))}
                     </Listbox>
                 ) : null}
+
+
 
         </StyledHeader>
     );
