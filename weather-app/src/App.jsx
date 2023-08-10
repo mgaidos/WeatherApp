@@ -82,8 +82,6 @@ function App() {
     setCurrentLocationCountry,
   }
 
-
-
   useEffect(() => {
     getCoordinatesByIPGeolocation()
       .then(data => {

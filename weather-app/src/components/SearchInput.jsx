@@ -153,7 +153,9 @@ export default function UseAutocomplete() {
 
     } = state
 
-    
+
+
+
 
     useEffect(() => {
         /*
@@ -203,13 +205,17 @@ export default function UseAutocomplete() {
         getOptionLabel: (option) => option.address.name,
         filterOptions: (option) => option,
         isOptionEqualToValue: (option, value) => option.id === value.id,
-        
+        inputValue: inputValue
     });
 
     const deleteButton = () => {
         setInputValue('')
         setLocationOptions([])
+        setSearchedLocation('')
+
     }
+
+
 
 
 
