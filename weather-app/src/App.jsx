@@ -83,6 +83,7 @@ function App() {
   }
 
 
+
   useEffect(() => {
     getCoordinatesByIPGeolocation()
       .then(data => {

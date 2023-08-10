@@ -1,11 +1,16 @@
 
 
 import { useEffect, useContext } from 'react';
+
+
+//MUI Components
 import useAutocomplete from '@mui/base/useAutocomplete';
 import { styled } from '@mui/system';
 import SearchIcon from '@mui/icons-material/Search';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AddIcon from '@mui/icons-material/Add';
+import IconButton from '@mui/material/IconButton';
+import { Typography } from '@mui/material';
 
 import { WeatherContext } from '../App';
 
@@ -14,7 +19,7 @@ import { WeatherContext } from '../App';
 import { getLocationDataOptions } from '../utils/getLocationDataOptions'
 
 
-import { Typography } from '@mui/material';
+
 
 
 const Input = styled('input')(({ theme }) => ({
@@ -22,25 +27,16 @@ const Input = styled('input')(({ theme }) => ({
     width: '100%',
     //height: '2rem',
     color: 'white',
-    backgroundColor: 'rgba(5, 5, 5, 0.2)',
+    backgroundColor: 'rgba(5, 5, 5, 0)',
     border: "none",
-    borderRadius: theme.shape.borderRadius,
     padding: theme.spacing(1, 1, 1, 5),
-    //boxShadow: "3px 5px 5px -1px rgba(0,0,0,0.75)",
     '&:focus': {
         outline: 'none',
-
     },
 
-    '&:hover': {
-        outline: 'none',
-        backgroundColor: 'rgba(5, 5, 5, 0.4)',
-    },
     [theme.breakpoints.up('sm')]: {
-        width: '500px',
-
+        width: '400px',
     },
-
 
 }));
 
@@ -94,14 +90,20 @@ const Listbox = styled('ul')(({ theme }) => ({
 }));
 
 const SearchWrapper = styled('div')(({ theme }) => ({
-    backgroundColor: 'rgba(5, 5, 5, 0.2)',
+    backgroundColor: 'rgba(5, 5, 5, 0.3)',
     width: '100%',
     display: 'flex',
     alignItems: 'center',
     position: 'relative',
     [theme.breakpoints.up('sm')]: {
         width: '450px',
-    }
+    },
+    borderRadius: theme.shape.borderRadius,
+
+    '&:hover': {
+        outline: 'none',
+        backgroundColor: 'rgba(5, 5, 5, 0.4)',
+    },
 }))
 
 const IconWrapper = styled('div')(({ theme }) => ({
@@ -130,9 +132,8 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
 
 const DeleteIcon = styled(AddIcon)(({ theme }) => ({
     transform: 'rotate(45deg)',
-    '&:hover': {
-        color: 'blue',
-      },
+    zIndex: 5,
+
 }))
 
 export default function UseAutocomplete() {
@@ -140,6 +141,7 @@ export default function UseAutocomplete() {
     //CONTEXT
     const state = useContext(WeatherContext)
     const {
+        inputValue,
         locationOptions,
         searchedLocation,
         setLocationOptions,
@@ -167,8 +169,7 @@ export default function UseAutocomplete() {
 
 
     const handleChange = (e) => {
-        //console.log(e.target.value.trim())
-        state.setInputValue(e.target.value.trim())
+        state.setInputValue(e.target.value)
     }
 
     const handleClick = (option) => {
@@ -198,36 +199,37 @@ export default function UseAutocomplete() {
         options: locationOptions,
         getOptionLabel: (option) => option.address.name,
         filterOptions: (option) => option,
-        isOptionEqualToValue: (option, value) => option.id === value.id
+        isOptionEqualToValue: (option, value) => option.id === value.id,
+        inputValue: inputValue
     });
 
-    useEffect(() => {
-        // console.log(groupedOptions)
-    }, [groupedOptions])
+    const deleteButton = () => {
+        state.setInputValue('')
+        setLocationOptions([])
+    }
 
 
 
     return (
-        <StyledHeader {...getRootProps()}
-        >
+        <StyledHeader {...getRootProps()}>
+
+
+
 
             <SearchWrapper >
 
                 <IconWrapper>
                     <SearchIcon />
-                    <DeleteIcon />
                 </IconWrapper>
-
-
 
                 <Input placeholder='Vyberte místo' onInput={handleChange} {...getInputProps()} />
 
-
-
-
-
+                <IconButton onClick={deleteButton} sx={{ padding: 0, marginLeft: '1.5rem', }} >
+                    <DeleteIcon />
+                </IconButton>
 
             </SearchWrapper>
+
 
 
             {
