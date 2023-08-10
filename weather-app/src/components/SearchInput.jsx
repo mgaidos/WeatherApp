@@ -1,6 +1,6 @@
 
 
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useRef } from 'react';
 
 
 //MUI Components
@@ -153,6 +153,8 @@ export default function UseAutocomplete() {
 
     } = state
 
+    
+
     useEffect(() => {
         /*
         Returns max 5 location options based on user input (searchedLocation)
@@ -201,7 +203,7 @@ export default function UseAutocomplete() {
         getOptionLabel: (option) => option.address.name,
         filterOptions: (option) => option,
         isOptionEqualToValue: (option, value) => option.id === value.id,
-        inputValue: inputValue
+        
     });
 
     const deleteButton = () => {
@@ -223,7 +225,7 @@ export default function UseAutocomplete() {
                     <SearchIcon />
                 </IconWrapper>
 
-                <Input placeholder='Vyberte místo' onInput={handleChange} {...getInputProps()} />
+                <Input autoFocus placeholder='Vyberte místo' onInput={handleChange} {...getInputProps()} />
 
                 <IconButton onClick={deleteButton} sx={{ padding: 0, marginLeft: '1.5rem', }} >
                     <DeleteIcon />
