@@ -142,6 +142,7 @@ export default function UseAutocomplete() {
     const state = useContext(WeatherContext)
     const {
         inputValue,
+        setInputValue
         locationOptions,
         searchedLocation,
         setLocationOptions,
@@ -169,7 +170,7 @@ export default function UseAutocomplete() {
 
 
     const handleChange = (e) => {
-        state.setInputValue(e.target.value)
+        setInputValue(e.target.value)
     }
 
     const handleClick = (option) => {
@@ -204,7 +205,7 @@ export default function UseAutocomplete() {
     });
 
     const deleteButton = () => {
-        state.setInputValue('')
+        setInputValue('')
         setLocationOptions([])
     }
 
