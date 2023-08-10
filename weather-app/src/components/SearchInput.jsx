@@ -142,7 +142,7 @@ export default function UseAutocomplete() {
     const state = useContext(WeatherContext)
     const {
         inputValue,
-        setInputValue
+        setInputValue,
         locationOptions,
         searchedLocation,
         setLocationOptions,
