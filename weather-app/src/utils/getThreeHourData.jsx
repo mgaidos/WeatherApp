@@ -28,11 +28,11 @@ export const getThreeHourData = (forecast, isSevenDaysForecast = false) => {
             }
         })
         const filteredThreeHourData = threeHourData.map((item) => {
-            const filteredIsDay = item.is_day.filter((item, index) => index % 2 === 0)
-            const temperature2m = item.temperature_2m.filter((item, index) => index % 2 === 0)
-            const weathercode = item.weathercode.filter((item, index) => index % 2 === 0)
-            const time = item.time.filter((item, index) => index % 2 === 0)
-            const precipitation = item.precipitation.filter((item, index) => index % 2 === 0)
+            const filteredIsDay = item.is_day.filter((item, index) => index % 1 === 0)
+            const temperature2m = item.temperature_2m.filter((item, index) => index % 1 === 0)
+            const weathercode = item.weathercode.filter((item, index) => index % 1 === 0)
+            const time = item.time.filter((item, index) => index % 1 === 0)
+            const precipitation = item.precipitation.filter((item, index) => index % 1 === 0)
 
             const weatherImageAndStatus = weathercode.map((code, index) => {
 
@@ -178,12 +178,12 @@ export const getThreeHourData = (forecast, isSevenDaysForecast = false) => {
                 }
 
                 return {
-                    is_day: chunkedArray(filteredIsDay, 12),
-                    temperature_2m: chunkedArray(temperature2m, 12),
-                    weathercode: chunkedArray(weathercode, 12),
-                    time: chunkedArray(time, 12),
-                    weatherImageAndStatus: chunkedArray(weatherImageAndStatus, 12),
-                    precipitation: chunkedArray(precipitation, 12)
+                    is_day: chunkedArray(filteredIsDay, 24),
+                    temperature_2m: chunkedArray(temperature2m, 24),
+                    weathercode: chunkedArray(weathercode, 24),
+                    time: chunkedArray(time, 24),
+                    weatherImageAndStatus: chunkedArray(weatherImageAndStatus, 24),
+                    precipitation: chunkedArray(precipitation, 24)
                 }
             }
 
